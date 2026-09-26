@@ -705,17 +705,39 @@
   .gallery-item::before { display: none }
   .section-black { padding: 56px 0 }
   .container { padding: 0 14px }
-  .hero-title { font-size: clamp(54px, 16vw, 78px); line-height: .9 }
+  /* Hero title: exactly two lines — Train Smart / Stay Strong, no wrapping */
+  .hero-title { font-size: clamp(44px, 13vw, 62px); line-height: .92 }
+  .title-smart, .title-strong-wrap { white-space: nowrap }
+  .pill-glow-strong { padding: 2px 18px 8px; border-radius: 18px; white-space: nowrap }
   .hero-tag { font-size: 15.5px }
-  .hero-ctas { flex-direction: column; align-items: stretch }
-  .btn-claim-pass, .btn-explore-programs { width: 100%; justify-content: center; min-height: 56px }
+  /* CTAs share one row on mobile — compact side-by-side buttons */
+  .hero-ctas { flex-direction: row; align-items: stretch; gap: 10px; flex-wrap: nowrap }
+  .btn-claim-pass, .btn-explore-programs {
+    flex: 1 1 0; min-width: 0; width: auto; min-height: 56px;
+    justify-content: center; text-align: center;
+    font-size: 13px; line-height: 1.25;
+  }
+  .btn-claim-pass { padding: 6px 6px 6px 12px; gap: 8px }
+  .btn-explore-programs { padding: 12px 8px; gap: 8px }
+  .pass-arrow-circle { width: 32px; height: 32px; flex-shrink: 0 }
+  .pass-arrow-circle svg { width: 15px; height: 15px }
+  .explore-arrow { width: 15px; height: 15px; flex-shrink: 0 }
   .hero-stats-row { grid-template-columns: 1fr 1fr; gap: 0; max-width: 100% }
   .stat-card { padding: 12px 10px }
   .stat-val { font-size: 24px }
   .facility-mini-card { padding: 8px }
   .mini-card-title { font-size: 12px }
   .mini-card-thumb { width: 46px; height: 40px }
-  .programs-grid, .pricing-grid, .playground-grid { grid-template-columns: 1fr }
+  .pricing-grid, .playground-grid { grid-template-columns: 1fr }
+  /* Programs stay a true grid on mobile — compact 2-col cards */
+  .programs-grid { grid-template-columns: repeat(2, 1fr); gap: 10px }
+  .program-card { padding: 16px 14px; min-height: 0 }
+  .program-top { margin-bottom: 12px }
+  .program-icon { width: 40px; height: 40px }
+  .program-badge { font-size: 10px; padding: 5px 10px }
+  .program-title { font-size: 20px; margin-bottom: 6px }
+  .program-desc { font-size: 13px; line-height: 1.55; margin-bottom: 14px }
+  .program-meta { font-size: 11px; gap: 6px; flex-wrap: wrap }
   /* Mobile mosaic: compact 2-col editorial grid instead of a tall 1-col stack */
   .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px }
   .gallery-item { aspect-ratio: 3 / 4; border-radius: 14px }
@@ -751,6 +773,10 @@
 }
 @media (max-width: 380px) {
   .hero-stats-row { grid-template-columns: 1fr 1fr }
+  .btn-claim-pass, .btn-explore-programs { font-size: 12px }
+  .program-card { padding: 14px 12px }
+  .program-title { font-size: 18px }
+  .program-desc { font-size: 12.5px }
   .gallery-grid { gap: 8px }
   .gallery-item figcaption { padding: 10px 11px }
   .gallery-item figcaption b { font-size: 17px }
