@@ -1,0 +1,380 @@
+/* ==========================================================================
+   ROYAL FITNESS WORLD — DESIGN SYSTEM v2
+   "Iron & Chrome" — Obsidian iron surfaces, silver ledger lines,
+   bone text. Athletic condensed display + humanist body.
+   Using: frontend-design (distinctive brief) + ui-ux-pro-max (system)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* ——— Core palette (4 + neutrals) ——— */
+  --obsidian: #06080b;
+  --iron: #0e1319;
+  --iron-2: #141b23;
+  --iron-3: #1b232e;
+  --gold: #c9c9c9;
+  --gold-bright: #ffffff;
+  --gold-deep: #7d7d7d;
+  --gold-wash: rgba(255, 255, 255, 0.08);
+  --bone: #f5f1e6;
+  --ash: #9aa6b2;
+  --ash-dim: #6d7a88;
+
+  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-sans: 'Barlow', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* ——— Semantic tokens ——— */
+  --bg: var(--obsidian);
+  --surface: var(--iron);
+  --surface-2: var(--iron-2);
+  --line: rgba(255, 255, 255, 0.16);
+  --line-soft: rgba(245, 241, 230, 0.09);
+  --text: var(--bone);
+  --muted: var(--ash);
+  --success: #22c55e;
+  --danger: #ef4444;
+
+  /* ——— Legacy aliases (JS + old CSS reference these — do not remove) ——— */
+  --font-sans-legacy: var(--font-sans);
+  --black: #000000;
+  --bg-dark: var(--obsidian);
+  --navy: var(--iron);
+  --navy2: var(--iron-2);
+  --steel: #2a3644;
+  --mist: var(--ash);
+  --accent: var(--gold);
+  --accent2: var(--gold-bright);
+  --accent-deep: var(--gold-deep);
+  --silver-grad: linear-gradient(135deg, #f4f4f4 0%, var(--gold) 48%, #7d7d7d 100%);
+  --silver-sheen: linear-gradient(135deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.02) 100%);
+  --white: var(--bone);
+  --glass: rgba(20, 27, 35, 0.6);
+  --glass-b: rgba(255, 255, 255, 0.14);
+  --glass-strong: rgba(20, 27, 35, 0.82);
+  --glass-bright: rgba(255, 255, 255, 0.28);
+  --dark-glass: rgba(6, 8, 11, 0.78);
+  --card-glass: linear-gradient(180deg, rgba(27,35,46,.72), rgba(14,19,25,.86));
+  --orange: var(--gold);
+  --orange2: var(--gold-bright);
+
+  /* ——— Motion + rhythm ——— */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-1: 150ms;
+  --dur-2: 240ms;
+  --r-sm: 10px;
+  --r-md: 18px;
+  --r-lg: 26px;
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-6: 48px;
+  --space-8: 72px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
+  background:
+    radial-gradient(1100px 500px at 85% -10%, rgba(255,255,255,.07), transparent 60%),
+    radial-gradient(900px 600px at -10% 30%, rgba(255,255,255,.05), transparent 60%),
+    var(--bg);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--gold); color: #0a0c0f }
+
+/* ——— Type scale: condensed display, humanist body ——— */
+h1, h2, h3, .display {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.015em;
+  line-height: 0.95;
+  text-wrap: balance;
+}
+p, li, dd { max-width: 68ch }
+p { color: #cfd6dd }
+
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; min-height: 44px }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+a { color: inherit; text-decoration: none }
+img { max-width: 100%; display: block }
+input, select, textarea { font: inherit; color: inherit }
+svg { flex-shrink: 0 }
+
+/* Skip link */
+.skip-link {
+  position: fixed; top: -60px; left: 16px; z-index: 2000;
+  background: var(--gold); color: #101319;
+  font-weight: 700; font-size: 14px;
+  padding: 12px 18px; border-radius: 12px;
+  transition: top var(--dur-1) var(--ease-out);
+}
+.skip-link:focus { top: 12px }
+
+/* ===================== SURFACES ===================== */
+.glass {
+  background: linear-gradient(180deg, rgba(27,35,46,.68), rgba(14,19,25,.78));
+  border: 1px solid var(--line-soft);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 18px 40px -18px rgba(0,0,0,.7);
+}
+
+.glass-strong {
+  background: linear-gradient(180deg, rgba(30,38,49,.9), rgba(10,14,19,.94));
+  border: 1px solid var(--line);
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 24px 50px -18px rgba(0,0,0,.8);
+}
+
+.round {
+  width: 48px; height: 48px; min-height: 48px;
+  border-radius: 50%;
+  display: grid; place-items: center; flex-shrink: 0;
+}
+.round svg, .pill svg {
+  width: 20px; height: 20px;
+  stroke: var(--bone); fill: none;
+  stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+}
+.pill {
+  border-radius: 999px; padding: 0 20px; height: 48px; min-height: 48px;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 15px; font-weight: 600;
+}
+.pill-sm {
+  border-radius: 999px; padding: 0 16px; height: 44px; min-height: 44px;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 600;
+}
+
+/* ===================== BUTTONS — white is the one memorable accent ===================== */
+.btn-orange {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  background: linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 55%, #8a8a8a 100%);
+  color: #131007; padding: 14px 28px; border-radius: 999px;
+  font-weight: 800; font-size: 15px; letter-spacing: 0.01em;
+  border: 1px solid rgba(255, 240, 180, 0.55);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6), inset 0 -8px 14px rgba(40,40,40,.32), 0 10px 24px -8px rgba(255,255,255,.5);
+  transition: transform var(--dur-1) var(--ease-out), box-shadow var(--dur-1), filter var(--dur-1);
+  min-height: 48px;
+}
+.btn-orange:hover {
+  transform: translateY(-2px); filter: brightness(1.05);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 16px 32px -8px rgba(255,255,255,.6);
+}
+.btn-orange:active { transform: translateY(0) scale(0.99) }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  background: rgba(245,241,230,.04);
+  border: 1px solid var(--line-soft);
+  color: var(--bone); padding: 14px 24px; border-radius: 999px;
+  font-weight: 600; font-size: 15px; cursor: pointer;
+  transition: border-color var(--dur-1), background var(--dur-1), transform var(--dur-1);
+  min-height: 48px;
+}
+.btn-ghost:hover { border-color: var(--line); background: rgba(255,255,255,.1); transform: translateY(-1px) }
+
+.send-btn {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  display: grid; place-items: center;
+  border: 1px solid rgba(255,255,255,.5);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 8px 20px -6px rgba(255,255,255,.55);
+  transition: transform var(--dur-1);
+}
+.send-btn:hover { transform: scale(1.05) }
+.send-btn svg { width: 22px; height: 22px; stroke: #131007; fill: none; stroke-width: 2 }
+
+/* ===================== RING / AVATAR / CHIPS ===================== */
+.ring {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  border-right-color: rgba(255,255,255,.25);
+  display: grid; place-items: center; flex-shrink: 0;
+}
+.ring svg { width: 18px; height: 18px; stroke: var(--gold-bright); fill: none; stroke-width: 1.8 }
+
+.avatar {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: radial-gradient(circle at 50% 32%, #e8c88f 0 24%, transparent 25%), linear-gradient(180deg, #3a4451, #1a212a);
+  border: 1.5px solid var(--line);
+  position: relative; overflow: hidden; flex-shrink: 0;
+}
+.avatar::after {
+  content: ""; position: absolute;
+  left: 16%; right: 16%; bottom: -22%; height: 44%;
+  border-radius: 50% 50% 0 0; background: #2b3542;
+}
+.avatar.sm { width: 34px; height: 34px; margin-left: -10px }
+.avatar.sm:first-child { margin-left: 0 }
+
+.chips { display: flex; gap: 8px }
+.chips button {
+  flex: 1; min-height: 44px; border-radius: 999px;
+  background: rgba(245,241,230,.05); border: 1px solid var(--line-soft);
+  font-size: 14px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  transition: border-color var(--dur-1), background var(--dur-1);
+}
+.chips button:hover { border-color: var(--line) }
+.chips button.on { background: var(--gold-wash); border-color: var(--gold); color: var(--gold-bright) }
+.chips svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8 }
+
+/* ===================== CARDS ===================== */
+.navy-card {
+  border-radius: var(--r-md); padding: 28px;
+  background: linear-gradient(180deg, rgba(27,35,46,.72), rgba(10,14,19,.9));
+  border: 1px solid var(--line-soft);
+  color: var(--bone);
+  box-shadow: 0 24px 50px -20px rgba(0,0,0,.8);
+}
+.navy-card.gold-edge { border-top: 2px solid var(--gold) }
+
+.big-num { font-family: var(--font-display); font-size: 52px; font-weight: 700; line-height: 0.9; color: var(--bone) }
+.big-num small { font-family: var(--font-sans); font-size: 14px; color: var(--muted); font-weight: 500; letter-spacing: 0 }
+
+mark {
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  color: #131007;
+  padding: 0 10px 2px; border-radius: 6px;
+  box-decoration-break: clone; -webkit-box-decoration-break: clone;
+}
+
+.stat-glass {
+  border-radius: var(--r-md); padding: 16px; min-height: 124px;
+  background: linear-gradient(180deg, rgba(27,35,46,.6), rgba(14,19,25,.8));
+  border: 1px solid var(--line-soft);
+  box-shadow: 0 16px 34px -18px rgba(0,0,0,.7);
+}
+.stat-glass .t {
+  display: flex; gap: 10px; align-items: center;
+  font-size: 15px; font-weight: 600; line-height: 1.2; color: var(--bone);
+}
+.stat-glass strong { display: block; margin-top: 12px; font-family: var(--font-display); font-size: 36px; font-weight: 700; letter-spacing: 0.01em }
+.stat-glass strong small { font-family: var(--font-sans); font-size: 14px; color: var(--muted); font-weight: 500 }
+
+/* ===================== BACKGROUND WASHES — single quiet layer ===================== */
+.bg-glow { position: fixed; z-index: 0; pointer-events: none; border-radius: 50% }
+.bg-glow-a {
+  top: -24%; left: -14%; width: 70vw; height: 70vw;
+  background: radial-gradient(circle at center, rgba(255,255,255,.09) 0%, transparent 62%);
+  filter: blur(70px);
+}
+.bg-glow-b, .bg-glow-c { display: none }
+#bg-canvas { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.5 }
+
+/* ===================== SCROLLBAR ===================== */
+::-webkit-scrollbar { width: 10px; height: 10px }
+::-webkit-scrollbar-track { background: var(--obsidian) }
+::-webkit-scrollbar-thumb { background: #2b3542; border-radius: 8px; border: 2px solid var(--obsidian) }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-deep) }
+
+/* ===================== LEDGER LABEL — replaces pill eyebrow-everywhere ===================== */
+.ledger-label {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold-bright);
+}
+.ledger-label::before { content: ""; width: 28px; height: 2px; background: var(--gold); border-radius: 2px }
+
+/* ===================== LOGO — real brand mark ===================== */
+.brand-logo-ring {
+  width: 56px; height: 56px; border-radius: 16px;
+  display: grid; place-items: center; flex-shrink: 0;
+  background: #0a0e13;
+  border: 1px solid var(--line);
+  overflow: visible;
+  padding: 4px;
+  box-shadow: 0 8px 20px -8px rgba(255,255,255,.55), inset 0 1px 0 rgba(255,255,255,.18);
+  transition: transform var(--dur-2) var(--ease-out);
+}
+.brand-logo-ring picture { display: grid; place-items: center; width: 100%; height: 100% }
+.brand-logo-ring img {
+  width: 100%; height: 100%; object-fit: contain; display: block;
+  filter: brightness(1.12) contrast(1.08) drop-shadow(0 0 6px rgba(245,241,230,.35));
+}
+.brand-logo:hover .brand-logo-ring { transform: rotate(-4deg) scale(1.05) }
+.brand-logo-ring.lg { width: 64px; height: 64px; border-radius: 18px }
+.brand-logo-ring.xs { width: 42px; height: 42px; border-radius: 12px; padding: 3px }
+
+/* ===================== SCROLL PROGRESS / REVEAL / TOAST / CONFETTI ===================== */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--gold-deep), var(--gold-bright));
+  z-index: 1200; box-shadow: 0 0 12px rgba(255,255,255,.7);
+}
+.reveal {
+  opacity: 0; transform: translateY(26px);
+  transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.in { opacity: 1; transform: none }
+/* Directional variants — driven by [data-reveal] set in landing.js */
+.reveal[data-reveal="up"] { transform: translateY(34px) }
+.reveal[data-reveal="down"] { transform: translateY(-34px) }
+.reveal[data-reveal="left"] { transform: translateX(-32px) }
+.reveal[data-reveal="right"] { transform: translateX(32px) }
+.reveal[data-reveal="scale"] { transform: translateY(18px) scale(.94) }
+.reveal[data-reveal="zoom"] { transform: scale(.9) }
+.reveal[data-reveal="blur"] { transform: translateY(20px); filter: blur(8px) }
+.reveal.in[data-reveal="blur"] { filter: blur(0) }
+/* Stagger helpers for grids — JS sets --reveal-delay per index */
+.reveal[data-stagger] { transition-delay: var(--reveal-delay, 0ms) }
+/* Section headers participate in the same reveal system */
+.section-hdr.reveal { border-left-color: transparent }
+.section-hdr.reveal.in { border-left-color: var(--gold); transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out), border-color 500ms var(--ease-out) 150ms }
+.toast-root {
+  position: fixed; bottom: 96px; left: 50%; transform: translateX(-50%);
+  z-index: 1300; display: flex; flex-direction: column; gap: 10px; align-items: center;
+  width: min(92vw, 420px); pointer-events: none;
+}
+.toast {
+  width: 100%; padding: 13px 16px; border-radius: 16px;
+  background: rgba(10,14,19,.94); border: 1px solid var(--gold);
+  color: var(--bone); font-size: 14px; font-weight: 600;
+  box-shadow: 0 18px 40px -12px rgba(0,0,0,.8);
+  display: flex; gap: 10px; align-items: center;
+  animation: toastIn 320ms var(--ease-out) both;
+}
+.toast b { color: var(--gold-bright) }
+@keyframes toastIn { from { opacity: 0; transform: translateY(12px) scale(.98) } to { opacity: 1; transform: none } }
+.toast.out { opacity: 0; transform: translateY(8px); transition: all 300ms }
+.confetti-canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1250 }
+
+/* ===================== MOTION — one entrance, rest is feedback ===================== */
+@media (prefers-reduced-motion: no-preference) {
+  .rise-once { animation: riseOnce 700ms var(--ease-out) both }
+  @keyframes riseOnce { from { opacity: 0; transform: translateY(18px) } to { opacity: 1; transform: none } }
+  .arc-anim { animation: arcDraw 1.2s var(--ease-out) both }
+  @keyframes arcDraw { from { stroke-dashoffset: 300 } }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important }
+  .reveal, .gallery-item.reveal, .program-card.reveal, .price-row.reveal, .review-card.reveal {
+    opacity: 1 !important; transform: none !important; filter: none !important;
+  }
+  .gallery-item img { transform: none !important }
+  .gallery-item figcaption b, .gallery-item figcaption span { opacity: 1 !important; transform: none !important }
+}

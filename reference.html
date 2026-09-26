@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Royal Fitness World | रॉयल फिटनेस वर्ल्ड</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0f2233; --navy2:#1c3a55; --steel:#3d6a91; --mist:#a9bccd;
+  --orange:#ff7a2b; --orange2:#ffa24d; --white:#f4f8fb;
+  --glass:rgba(255,255,255,.09); --glass-b:rgba(255,255,255,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Manrope,system-ui,sans-serif;color:var(--white);
+  background:radial-gradient(circle at 20% 0,#fdf1ef 0,#f6eef0 40%,#efe9ee 100%);
+  min-height:100vh;padding:32px 16px 48px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+
+/* gym header */
+.brand{max-width:1240px;margin:0 auto 32px;color:#1c2b3a;display:flex;flex-wrap:wrap;gap:16px 40px;align-items:flex-end;justify-content:space-between}
+.brand h1{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.02em;line-height:1.05}
+.brand h1 small{display:block;font-size:.5em;font-weight:600;color:#5b6c7c;margin-top:4px}
+.brand ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px 20px;font-size:14px;font-weight:600;color:#3b4d5e}
+.brand li b{color:var(--orange)}
+
+.stage{max-width:1240px;margin:0 auto;display:flex;justify-content:center;align-items:flex-start;gap:48px;flex-wrap:wrap}
+
+/* phone frame */
+.phone{position:relative;width:412px;height:892px;border-radius:56px;overflow:hidden;
+  background:linear-gradient(170deg,var(--navy2),var(--navy) 70%);
+  box-shadow:0 0 0 3px #fff,0 30px 60px -10px rgba(40,50,80,.35);isolation:isolate}
+.phone.mid{margin-top:-60px}
+.status{position:absolute;top:22px;left:30px;right:30px;display:flex;justify-content:space-between;font-size:14px;font-weight:600;z-index:5}
+.status i{display:inline-block;width:22px;height:11px;border-radius:3px;background:var(--white);margin-left:6px}
+.status i.s{width:16px;background:linear-gradient(90deg,#fff 60%,rgba(255,255,255,.4) 60%)}
+.home-bar{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);width:104px;height:4px;border-radius:4px;background:var(--white);z-index:5}
+
+.glass{background:var(--glass);border:1px solid var(--glass-b);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.round{width:56px;height:56px;border-radius:50%;display:grid;place-items:center}
+.round svg,.pill svg{width:20px;height:20px;stroke:var(--white);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pill{border-radius:30px;padding:0 20px;height:52px;display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600}
+
+/* SCREEN 1 */
+.s1 .top{position:absolute;top:80px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center;z-index:4}
+.s1 .bg{position:absolute;inset:0;z-index:-1;background:
+  radial-gradient(ellipse at 30% 30%,rgba(61,106,145,.9),transparent 60%),
+  linear-gradient(180deg,#3a6c98 0,#274a68 50%,#0f2233 100%)}
+.s1 .bg::after{content:"";position:absolute;left:8%;top:22%;width:60%;height:60%;border-radius:50%;background:rgba(15,34,51,.55);filter:blur(50px)}
+.athlete{position:absolute;left:-10px;right:-20px;top:300px;height:520px;z-index:1}
+.s1 h2{position:absolute;top:190px;left:20px;font-size:40px;line-height:1.12;font-weight:800;letter-spacing:-.02em;z-index:4}
+.s1 h2 mark{background:var(--orange);color:#fff;padding:0 8px 2px 4px;margin-left:-2px;display:inline-block}
+.hr{position:absolute;right:20px;top:672px;z-index:4;display:flex;align-items:center;gap:8px}
+.hr .dot{width:16px;height:16px;border-radius:50%;background:var(--orange);position:absolute;left:-190px}
+.hr .line{position:absolute;left:-172px;width:84px;border-top:2px dashed rgba(255,255,255,.7)}
+.hr .pill{height:56px;position:relative}
+.chat{position:absolute;left:20px;right:20px;bottom:36px;border-radius:32px;padding:14px;z-index:4;background:rgba(80,120,160,.35)}
+.chips{display:flex;gap:6px;margin-bottom:12px}
+.chips button{flex:1;height:44px;border-radius:22px;background:var(--glass);border:1px solid var(--glass-b);font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px}
+.chips button.on{background:rgba(255,122,43,.35);border-color:var(--orange)}
+.chips svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:1.8}
+.ask{background:rgba(15,34,51,.35);border-radius:24px;padding:16px;height:170px;display:flex;flex-direction:column;justify-content:space-between}
+.ask input{background:none;border:0;color:var(--white);font:500 15px Manrope,sans-serif;width:100%;outline:0}
+.ask input::placeholder{color:var(--mist)}
+.ask .row{display:flex;gap:10px;align-items:center}
+.ask .round{width:46px;height:46px}
+.send{margin-left:auto;width:56px;height:56px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--orange2),var(--orange));display:grid;place-items:center;box-shadow:0 8px 20px rgba(255,122,43,.5)}
+.send svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2}
+
+/* SCREEN 2 */
+.s2 .head{position:absolute;top:70px;left:20px;right:20px;display:flex;align-items:center;gap:12px}
+.avatar{width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 50% 35%,#f0c9a8 0 22%,transparent 23%),linear-gradient(#5c86ad,#2c4c6b);border:2px solid var(--glass-b);position:relative;overflow:hidden}
+.avatar::after{content:"";position:absolute;left:14%;right:14%;bottom:-20%;height:42%;border-radius:50% 50% 0 0;background:#3b6a97}
+.avatar.sm{width:36px;height:36px;border:2px solid var(--navy);margin-left:-12px}
+.head b{display:block;font-size:20px;font-weight:700}
+.head span{color:var(--mist);font-size:15px}
+.head .round{margin-left:auto}
+.card{position:absolute;left:20px;right:20px;border-radius:32px;padding:22px}
+.act{top:142px;height:416px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.2))}
+.act h3{font-size:22px;font-weight:700;margin-left:70px}
+.act p{color:var(--mist);margin-left:70px;font-size:15px}
+.act .round{position:absolute;top:22px;left:22px;width:48px;height:48px}
+.gauge{position:absolute;left:0;right:0;top:100px;display:grid;place-items:center}
+.gauge svg{width:330px;height:220px}
+.gauge .n{position:absolute;top:70px;text-align:center}
+.gauge .n b{font-size:52px;font-weight:600;display:block;line-height:1}
+.gauge .n span{color:var(--mist);font-size:15px;font-weight:500}
+.stats{position:absolute;left:14px;right:14px;bottom:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat{border-radius:24px;padding:16px;height:130px;background:var(--glass);border:1px solid var(--glass-b)}
+.stat .t{display:flex;gap:10px;align-items:center;font-size:17px;font-weight:600;line-height:1.15}
+.ring{width:48px;height:48px;border-radius:50%;border:2px solid var(--orange);border-right-color:rgba(255,122,43,.25);display:grid;place-items:center;flex:none}
+.ring svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.8}
+.stat strong{display:block;margin-top:14px;font-size:30px;font-weight:600}
+.stat strong small{font-size:16px;color:var(--mist);font-weight:500}
+.run{top:578px;height:200px;padding:0;overflow:hidden;background:linear-gradient(180deg,rgba(60,90,120,.4),rgba(210,150,120,.35) 55%,rgba(30,50,70,.7))}
+.run .figure{position:absolute;left:52%;bottom:0;width:70px;height:130px;border-radius:40px 40px 6px 6px;background:linear-gradient(#5a4a4a,#2a2230);filter:blur(4px)}
+.run .t{position:absolute;top:18px;left:18px;display:flex;gap:12px;align-items:center}
+.run .t .round{width:46px;height:46px}
+.run h3{font-size:20px;font-weight:700}.run p{color:var(--mist);font-size:15px}
+.run .go{position:absolute;top:18px;right:18px;width:60px;height:60px;border-radius:50%;background:#e9edf1;display:grid;place-items:center}
+.run .go svg{width:20px;height:20px;stroke:#1c2b3a;fill:none;stroke-width:2}
+.run .km{position:absolute;left:18px;bottom:6px;font-size:44px;font-weight:600}.run .km small{font-size:16px;color:var(--mist)}
+.nav{position:absolute;left:0;right:0;bottom:56px;display:flex;justify-content:center;gap:6px}
+.nav button{width:64px;height:64px;border-radius:32px;background:rgba(255,255,255,.1);border:1px solid var(--glass-b);display:grid;place-items:center}
+.nav button svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav button.on{background:var(--orange);border-color:var(--orange2)}
+.nav button.ai{background:radial-gradient(circle at 30% 30%,var(--orange2),var(--orange));width:76px;box-shadow:0 0 0 3px rgba(255,255,255,.7)}
+
+/* SCREEN 3 */
+.s3 .map{position:absolute;inset:0;z-index:-1;background:#16283a}
+.s3 .map svg{width:100%;height:100%}
+.s3 .top{position:absolute;top:80px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center}
+.s3 h2{position:absolute;top:184px;left:20px;font-size:32px;font-weight:800}
+.joined{position:absolute;top:238px;left:20px;display:flex;align-items:center;font-size:15px;color:var(--mist)}
+.joined .cnt{width:36px;height:36px;border-radius:50%;background:#33475a;border:2px solid var(--navy);margin-left:-12px;display:grid;place-items:center;font-size:12px;font-weight:700;color:#fff}
+.joined span{margin-left:12px}
+.pin{position:absolute;width:44px;height:44px;border-radius:50%;background:rgba(255,122,43,.3);display:grid;place-items:center;z-index:2}
+.pin::after{content:"";width:20px;height:20px;border-radius:50%;background:var(--orange);border:3px solid #fff2e8;box-shadow:0 0 0 2px var(--orange)}
+.tag{position:absolute;z-index:2;background:rgba(255,255,255,.14);border:1px solid var(--glass-b);backdrop-filter:blur(10px);border-radius:20px;padding:6px 14px;font-size:13px;font-weight:600}
+.tag.p{padding:4px}.tag.p .avatar{width:44px;height:44px;border:0}
+.time{position:absolute;left:0;right:0;top:582px;text-align:center}
+.time b{font-size:52px;font-weight:600;letter-spacing:-.01em}.time span{display:block;color:var(--mist);font-size:14px;margin-top:2px}
+.pinbtn{position:absolute;left:50%;top:664px;transform:translateX(-50%);width:48px;height:48px;border-radius:50%;background:var(--glass);border:1px solid var(--glass-b);display:grid;place-items:center}
+.pinbtn svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.8}
+.dist{position:absolute;left:0;right:0;top:726px;text-align:center}
+.dist b{font-size:22px;font-weight:600;display:block}.dist span{color:var(--mist);font-size:14px}
+.ctrl{position:absolute;left:24px;right:24px;bottom:34px;display:flex;align-items:center;justify-content:space-between}
+.ctrl .m{height:64px;border-radius:32px;padding:0 20px 0 12px;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.1);border:1px solid var(--glass-b)}
+.ctrl .m .ring{width:40px;height:40px;border-color:transparent;background:rgba(255,255,255,.08)}
+.ctrl .m small{display:block;color:var(--mist);font-size:13px}.ctrl .m b{font-size:20px;font-weight:700}
+.play{width:76px;height:76px;border-radius:50%;background:linear-gradient(#3b4c5d,#1e2f40);border:1px solid var(--glass-b);display:grid;place-items:center;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.play svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2}
+
+/* reviews strip */
+.info{max-width:1240px;margin:48px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;color:#fff}
+.info article{border-radius:28px;padding:24px;background:linear-gradient(170deg,var(--navy2),var(--navy))}
+.info h4{font-size:18px;font-weight:700;margin-bottom:10px}
+.info p{color:var(--mist);font-size:15px;line-height:1.55}
+.info .big{font-size:44px;font-weight:700;color:var(--white)}
+.info .big small{font-size:15px;color:var(--mist);font-weight:500}
+.info .cta{margin-top:16px;display:inline-block;background:radial-gradient(circle at 30% 30%,var(--orange2),var(--orange));color:#fff;padding:12px 22px;border-radius:26px;font-weight:700;text-decoration:none;font-size:15px}
+
+@media(max-width:1340px){.phone.mid{margin-top:0}}
+@media(max-width:460px){body{padding:16px 0 32px}.phone{transform:scale(.86);transform-origin:top center;margin-bottom:-120px}}
+@media(prefers-reduced-motion:no-preference){.arc{animation:draw 1.4s ease-out both}@keyframes draw{from{stroke-dashoffset:300}}}
+</style>
+</head>
+<body>
+
+<header class="brand">
+  <h1>Royal Fitness World<small>रॉयल फिटनेस वर्ल्ड</small></h1>
+  <ul>
+    <li><b>4.4</b> (24 reviews)</li>
+    <li>Gym · Open, closes 11 pm</li>
+    <li>Antariksh Tower, Mangalwar Peth, Pune 411001</li>
+    <li>080071 84417</li>
+  </ul>
+</header>
+
+<main class="stage">
+
+  <!-- SCREEN 1 -->
+  <section class="phone s1" aria-label="AI coach">
+    <div class="bg"></div>
+    <div class="status"><span>9:40 PM</span><span>▂▄▆ <i class="s"></i><i></i></span></div>
+    <div class="top">
+      <button class="round glass" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+      <span class="pill glass">Royal AI 2.5</span>
+      <button class="round glass" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M5 8h14M5 16h14"/></svg></button>
+    </div>
+    <h2>Train Smart<br>Stay <mark>Strong</mark></h2>
+
+    <svg class="athlete" viewBox="0 0 440 520" aria-hidden="true">
+      <defs><linearGradient id="sh" x1="0" x2="1"><stop offset="0" stop-color="#4fa8e0"/><stop offset="1" stop-color="#2f7fbf"/></linearGradient>
+      <filter id="bl"><feGaussianBlur stdDeviation="1.2"/></filter></defs>
+      <path d="M120 470 L170 330 L250 300 L270 470Z" fill="#141a22"/>
+      <path d="M140 210 C150 150 210 120 260 150 L290 260 L240 330 L150 320Z" fill="url(#sh)"/>
+      <path d="M150 240 C110 250 60 290 20 340 L40 375 C90 345 150 315 190 300Z" fill="#c98a68"/>
+      <path d="M270 170 C330 140 390 130 440 160 L430 200 C380 190 320 210 280 240Z" fill="#c98a68"/>
+      <circle cx="232" cy="112" r="46" fill="#c98a68"/>
+      <path d="M186 104 C190 60 250 50 278 90 C260 78 220 80 198 108Z" fill="#2a1d18"/>
+      <path d="M225 150 L290 150 L285 185 L235 175Z" fill="#b57a5a"/>
+    </svg>
+
+    <div class="hr"><span class="dot"></span><span class="line"></span>
+      <span class="pill glass"><svg viewBox="0 0 24 24"><path d="M2 12h4l2-5 4 10 3-8 2 3h5"/></svg>160
+      <svg viewBox="0 0 24 24"><circle cx="15" cy="5" r="2"/><path d="M8 21l3-6 3 2v4M11 15l-1-5 5-1 3 3M9 10l-4 2"/></svg></span>
+    </div>
+
+    <div class="chat glass">
+      <div class="chips">
+        <button><svg viewBox="0 0 24 24"><path d="M12 3s5 4 5 9a5 5 0 01-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3 1-5 1-8z"/></svg>Power</button>
+        <button><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4v16M4 12h16"/></svg>Mindset</button>
+        <button><svg viewBox="0 0 24 24"><circle cx="12" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M11 8L7 16M13 8l4 8"/></svg>Balance</button>
+      </div>
+      <div class="ask">
+        <label class="row" style="gap:10px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><input placeholder="Ask me anything…" aria-label="Ask your coach"></label>
+        <div class="row">
+          <button class="round glass" aria-label="Add"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+          <button class="round glass" aria-label="Voice"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/></svg></button>
+          <button class="round glass" aria-label="Magic"><svg viewBox="0 0 24 24"><path d="M5 19L15 9M14 4l1 2 2 1-2 1-1 2-1-2-2-1 2-1zM19 12l.7 1.3L21 14l-1.3.7L19 16l-.7-1.3L17 14l1.3-.7z"/></svg></button>
+          <button class="send" aria-label="Send"><svg viewBox="0 0 24 24"><path d="M21 3L3 11l7 3 3 7z"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="home-bar"></div>
+  </section>
+
+  <!-- SCREEN 2 -->
+  <section class="phone mid s2" aria-label="Dashboard">
+    <div class="status"><span>9:40 PM</span><span>▂▄▆ <i class="s"></i><i></i></span></div>
+    <div class="head">
+      <div class="avatar"></div>
+      <div><b>Michael David</b><span>Welcome Back!</span></div>
+      <button class="round glass" aria-label="Notifications"><svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0112 0v5l2 2H4zM10 21h4"/></svg></button>
+    </div>
+
+    <div class="card glass act">
+      <button class="round glass" aria-label="Activity"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="3"/><path d="M8 14l3-3 2 2 3-4"/></svg></button>
+      <h3>Daily Activity</h3><p>Keep moving every day.</p>
+      <div class="gauge">
+        <svg viewBox="0 0 330 220">
+          <defs><pattern id="st" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="4" height="8" fill="rgba(255,255,255,.35)"/></pattern></defs>
+          <path d="M40 190 A125 125 0 0 1 290 190" fill="none" stroke="url(#st)" stroke-width="22" stroke-linecap="round" transform="rotate(20 165 165)"/>
+          <path class="arc" d="M40 190 A125 125 0 0 1 200 66" pathLength="300" stroke-dasharray="300" fill="none" stroke="#ff7a2b" stroke-width="22" stroke-linecap="round" transform="translate(0 0)"/>
+          <circle cx="200" cy="66" r="6" fill="#fff"/>
+        </svg>
+        <div class="n"><b>80</b><span>Activity Score</span></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="t"><span class="ring"><svg viewBox="0 0 24 24"><path d="M8 4c2 0 3 2 3 5s-1 5-3 5-3-2-3-5 1-5 3-5zM16 10c2 0 3 2 3 5s-1 5-3 5-3-2-3-5 1-5 3-5z"/></svg></span>Step<br>Tracker</div><strong>8792 <small>Step</small></strong></div>
+        <div class="stat"><div class="t"><span class="ring"><svg viewBox="0 0 24 24"><path d="M6 10v4M18 10v4M3 11v2M21 11v2M6 12h12"/></svg></span>Fit<br>Flow</div><strong>40 <small>/ 60 Min</small></strong></div>
+      </div>
+    </div>
+
+    <div class="card glass run">
+      <div class="figure"></div>
+      <div class="t"><span class="round glass"><svg viewBox="0 0 24 24"><circle cx="15" cy="5" r="2"/><path d="M8 21l3-6 3 2v4M11 15l-1-5 5-1 3 3M9 10l-4 2"/></svg></span><div><h3>Morning Run</h3><p>Start your day.</p></div></div>
+      <button class="go" aria-label="Open"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></button>
+      <div class="km">10,58 <small>Km</small></div>
+    </div>
+
+    <nav class="nav" aria-label="Main">
+      <button class="on" aria-label="Home"><svg viewBox="0 0 24 24"><path d="M5 11l7-6 7 6v8H5z"/></svg></button>
+      <button aria-label="Run"><svg viewBox="0 0 24 24"><circle cx="15" cy="5" r="2"/><path d="M8 21l3-6 3 2v4M11 15l-1-5 5-1 3 3M9 10l-4 2"/></svg></button>
+      <button aria-label="Power"><svg viewBox="0 0 24 24"><path d="M13 3L6 13h5l-1 8 7-10h-5z"/></svg></button>
+      <button class="ai" aria-label="AI coach"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg></button>
+    </nav>
+    <div class="home-bar"></div>
+  </section>
+
+  <!-- SCREEN 3 -->
+  <section class="phone s3" aria-label="Running mode">
+    <div class="map">
+      <svg viewBox="0 0 412 892" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="412" height="892" fill="#16283a"/>
+        <path d="M-10 300 C60 250 120 300 200 260 S330 200 430 240" stroke="#2c4157" stroke-width="12" fill="none"/>
+        <path d="M-10 640 C80 600 140 700 240 640 S360 580 430 620" stroke="#22364b" stroke-width="30" fill="none" opacity=".7"/>
+        <path d="M140 0 L120 330 L60 420" stroke="#0c1622" stroke-width="3" fill="none"/>
+        <path d="M280 0 L300 230 L420 300" stroke="#0c1622" stroke-width="3" fill="none"/>
+        <path d="M0 500 L200 470 L420 520" stroke="#2c4157" stroke-width="4" fill="none"/>
+        <path d="M110 260 L340 250 L300 700 L260 730 L230 690 L110 480Z" fill="#0f1c2b" opacity=".65"/>
+        <path d="M113 340 C180 470 200 500 240 585 C252 605 266 602 270 585 L280 540 L330 340 L318 270" stroke="#ff7a2b" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="status"><span>9:40 PM</span><span>▂▄▆ <i class="s"></i><i></i></span></div>
+    <div class="top">
+      <button class="round glass" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+      <span class="pill glass">Morning Run</span>
+      <button class="round glass" aria-label="Map"><svg viewBox="0 0 24 24"><path d="M4 6l5-2 6 2 5-2v14l-5 2-6-2-5 2zM9 4v14M15 6v14"/></svg></button>
+    </div>
+    <h2>Running mode</h2>
+    <div class="joined"><div class="avatar sm" style="margin-left:0"></div><div class="avatar sm"></div><div class="avatar sm"></div><div class="cnt">20+</div><span>21 joined today</span></div>
+
+    <span class="pin" style="left:1090px;left:210px;top:380px"></span>
+    <span class="pin" style="left:92px;top:459px;background:rgba(255,122,43,.35)"></span>
+    <span class="pin" style="left:44px;top:656px;width:30px;height:30px;transform:scale(.7)"></span>
+    <span class="tag" style="left:288px;top:387px">4.3 km</span>
+    <span class="tag p" style="left:296px;top:432px"><div class="avatar"></div></span>
+    <span class="tag" style="left:210px;top:575px">4.5 km</span>
+    <span class="tag p" style="left:222px;top:618px"><div class="avatar"></div></span>
+
+    <div class="time"><b>45:25</b><span>Total Duration</span></div>
+    <div class="pinbtn"><svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/></svg></div>
+    <div class="dist"><b>1.25</b><span>km</span></div>
+
+    <div class="ctrl">
+      <div class="m"><span class="ring"><svg viewBox="0 0 24 24"><path d="M12 3s5 4 5 9a5 5 0 01-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3 1-5 1-8z"/></svg></span><div><small>Kcal</small><b>638</b></div></div>
+      <button class="play" aria-label="Play"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg></button>
+      <div class="m"><span class="ring"><svg viewBox="0 0 24 24"><path d="M12 20s-8-5-8-11a4.5 4.5 0 018-2.5A4.5 4.5 0 0120 9c0 6-8 11-8 11z"/></svg></span><div><small>bpm</small><b>120</b></div></div>
+    </div>
+    <div class="home-bar"></div>
+  </section>
+</main>
+
+<section class="info" aria-label="About the gym">
+  <article><h4>Rated by members</h4><div class="big">4.4 <small>/ 5 · 24 reviews</small></div><p>Best ambience, supportive staff and a Pune city view from the cardio section.</p></article>
+  <article><h4>Visit us</h4><p>9th floor, Antariksh Tower, Office 411 &amp; 403, Mangalwar Peth, Somwar Peth, Pune, Maharashtra 411001.<br>Open today, closes 11 pm.</p></article>
+  <article><h4>Join Royal Fitness World</h4><p>Call 080071 84417 to book a trial session.</p><a class="cta" href="tel:08007184417">Call now</a></article>
+</section>
+
+</body>
+</html>

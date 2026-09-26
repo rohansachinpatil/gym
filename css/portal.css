@@ -1,0 +1,441 @@
+/* ==========================================================================
+   MEMBER PORTAL — Iron & Gold dense dashboard
+   High density (8-32px), gold active states, hairline hierarchy.
+   ========================================================================== */
+
+.app-shell {
+  min-height: 100dvh;
+  position: relative; z-index: 1;
+  background:
+    radial-gradient(700px 320px at 50% -8%, rgba(255,255,255,.1), transparent 65%),
+    var(--bg);
+  display: flex; flex-direction: column; align-items: center;
+  padding: 88px 16px calc(144px + env(safe-area-inset-bottom));
+}
+.app-container { width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 12px }
+
+/* Topbar — fixed ledger */
+.portal-topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  width: 100%; max-width: 512px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 12px 16px;
+  background: rgba(6,8,11,.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line-soft);
+}
+.portal-brand { height: 44px; font-size: 13px; gap: 8px; color: var(--gold-bright); font-weight: 800 }
+.brand-logo-ring.xs { width: 30px; height: 30px }
+.streak-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 44px; padding: 0 14px; border-radius: 999px;
+  background: rgba(255,255,255,.12); border: 1px solid var(--gold);
+  color: var(--gold-bright); font-weight: 800; font-size: 14px; min-height: 44px;
+}
+.streak-pill svg { width: 16px; height: 16px; fill: currentColor }
+.streak-pill.hot { background: var(--gold); color: #131007; animation: streakPop 500ms var(--ease-out) }
+@keyframes streakPop { 0% { transform: scale(.9) } 50% { transform: scale(1.1) rotate(-3deg) } 100% { transform: scale(1) } }
+.xp-bar {
+  position: relative; height: 30px; border-radius: 999px; overflow: hidden;
+  background: rgba(245,241,230,.06); border: 1px solid var(--line-soft);
+}
+.xp-fill {
+  height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--gold-deep), var(--gold-bright));
+  transition: width 600ms var(--ease-out);
+  box-shadow: 0 0 14px rgba(255,255,255,.5);
+}
+.xp-text {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font-size: 11.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--bone);
+  text-shadow: 0 1px 6px rgba(0,0,0,.8);
+}
+.notif-dot {
+  position: absolute; top: 12px; right: 12px; width: 10px; height: 10px; border-radius: 50%;
+  background: #ef4444; border: 2px solid #0a0e13;
+}
+.app-header .round { position: relative }
+.hide-xs { display: inline }
+.show-xs { display: none }
+.ex-item { transition: transform 150ms var(--ease-out), border-color 150ms }
+.ex-item:active { transform: scale(.985) }
+.day-btn.active { box-shadow: 0 0 0 3px rgba(255,255,255,.25) }
+.dock-btn { position: relative }
+.dock-btn.on::after {
+  content: ""; position: absolute; bottom: 6px; width: 18px; height: 3px; border-radius: 3px; background: #131007;
+}
+.toast-root { bottom: 110px }
+
+/* Header */
+.app-header { display: flex; align-items: center; gap: 12px; padding: 6px 2px }
+.app-header .avatar { width: 52px; height: 52px }
+.app-header b { display: block; font-family: var(--font-display); font-size: 28px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; line-height: 0.95 }
+.app-header span { color: var(--muted); font-size: 13.5px; font-weight: 500 }
+.app-header .round {
+  margin-left: auto; width: 48px; height: 48px;
+  background: rgba(245,241,230,.05); border: 1px solid var(--line-soft);
+}
+.app-header .round:hover { border-color: var(--gold) }
+.app-header .round svg { stroke: var(--bone) }
+
+/* Activity card — gold gauge */
+.act-card {
+  border-radius: 20px; padding: 20px; position: relative;
+  background: linear-gradient(180deg, rgba(27,35,46,.72), rgba(10,14,19,.9));
+  border: 1px solid var(--line-soft); border-top: 2px solid var(--gold);
+}
+.act-card .icon-btn {
+  position: absolute; top: 20px; left: 20px;
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--gold-wash); border: 1px solid var(--line);
+  display: grid; place-items: center; color: var(--gold-bright);
+}
+.act-card .icon-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8 }
+.act-card h3 { font-size: 30px; font-weight: 700; margin-left: 60px; text-transform: uppercase }
+.act-card .sub { color: var(--muted); margin-left: 60px; font-size: 13.5px }
+.gauge-wrap { width: 100%; display: grid; place-items: center; margin: 16px 0 12px; position: relative }
+.gauge-wrap svg { width: 100%; max-width: 320px; height: auto }
+.gauge-center { position: absolute; text-align: center; top: 50%; transform: translateY(-8%) }
+.gauge-center b { font-family: var(--font-display); font-size: 56px; font-weight: 700; display: block; line-height: 0.9 }
+.gauge-center span { color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase }
+.stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px }
+
+/* Run card — quiet, gold arrow */
+.run-card {
+  border-radius: 20px; padding: 0; position: relative; overflow: hidden;
+  min-height: 168px; cursor: pointer;
+  background:
+    linear-gradient(180deg, rgba(6,8,11,.1), rgba(6,8,11,.72)),
+    url('../images/cardio.png') center/cover no-repeat;
+  border: 1px solid var(--line-soft);
+  transition: transform var(--dur-1) var(--ease-out), border-color var(--dur-1);
+}
+.run-card:hover { transform: translateY(-3px); border-color: var(--gold) }
+.run-card:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px }
+.run-figure { display: none }
+.run-top { position: absolute; top: 16px; left: 16px; display: flex; gap: 12px; align-items: center; z-index: 1 }
+.run-top .round { width: 44px; height: 44px; background: rgba(6,8,11,.6); border: 1px solid var(--line-soft) }
+.run-top .round svg { stroke: var(--gold-bright) }
+.run-top h3 { font-size: 24px; font-weight: 700; text-transform: uppercase; text-shadow: 0 2px 12px rgba(0,0,0,.8) }
+.run-top p { color: #d6dde4; font-size: 13px; text-shadow: 0 1px 8px rgba(0,0,0,.8) }
+.run-go {
+  position: absolute; top: 16px; right: 16px; z-index: 1;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--gold); color: #131007; display: grid; place-items: center;
+  transition: transform var(--dur-1);
+  border: 1px solid rgba(255,255,255,.5);
+}
+.run-card:hover .run-go { transform: rotate(45deg) }
+.run-go svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2 }
+.run-km {
+  position: absolute; left: 16px; bottom: 10px; z-index: 1;
+  font-family: var(--font-display); font-size: 44px; font-weight: 700; line-height: 1;
+  text-shadow: 0 2px 14px rgba(0,0,0,.9);
+}
+.run-km small { font-family: var(--font-sans); font-size: 13px; color: var(--gold-bright); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase }
+
+/* Bottom dock — slim, gold active */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 900;
+  display: flex; justify-content: center; gap: 8px;
+  padding: 12px 16px calc(14px + env(safe-area-inset-bottom));
+  background: linear-gradient(transparent, rgba(6,8,11,.92) 36%);
+}
+.dock-btn {
+  width: 60px; height: 56px; border-radius: 18px;
+  background: rgba(20,27,35,.85); border: 1px solid var(--line-soft);
+  display: grid; place-items: center;
+  transition: background var(--dur-1), border-color var(--dur-1), transform var(--dur-1);
+  backdrop-filter: blur(14px);
+}
+.dock-btn svg { width: 22px; height: 22px; stroke: var(--ash); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round }
+.dock-btn:hover { border-color: var(--line); transform: translateY(-1px) }
+.dock-btn:hover svg { stroke: var(--bone) }
+.dock-btn.on { background: var(--gold); border-color: var(--gold) }
+.dock-btn.on svg { stroke: #131007 }
+.dock-btn.ai { background: linear-gradient(180deg, var(--gold-bright), var(--gold)); border-color: rgba(255,255,255,.5) }
+.dock-btn.ai svg { stroke: #131007 }
+
+/* Session / map */
+.map-screen {
+  border-radius: 20px; overflow: hidden; position: relative;
+  background: #0c1219; min-height: 220px;
+  border: 1px solid var(--line-soft);
+}
+.map-screen svg { width: 100%; height: 100%; display: block }
+.session-title { font-size: 34px; font-weight: 700; text-transform: uppercase }
+.joined-row { display: flex; align-items: center; font-size: 13.5px; color: var(--muted); gap: 4px }
+.joined-cnt {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--iron-3); border: 1.5px solid var(--gold);
+  margin-left: -10px; display: grid; place-items: center;
+  font-size: 11px; font-weight: 800; color: var(--gold-bright);
+}
+.joined-row > span { margin-left: 10px }
+.giant-timer { text-align: center; margin: 10px 0 4px }
+.giant-timer b { font-family: var(--font-display); font-size: 64px; font-weight: 700; letter-spacing: 0.02em; font-variant-numeric: tabular-nums; line-height: 0.9 }
+.giant-timer span { display: block; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 6px }
+.dist-center { text-align: center }
+.dist-center b { font-family: var(--font-display); font-size: 28px; font-weight: 700; display: block; font-variant-numeric: tabular-nums }
+.dist-center span { color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase }
+.ctrl-bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 2px }
+.ctrl-metric {
+  height: 60px; border-radius: 999px; padding: 0 16px 0 8px;
+  display: flex; align-items: center; gap: 10px; flex: 1;
+  background: rgba(20,27,35,.7); border: 1px solid var(--line-soft);
+}
+.ctrl-metric .ring { width: 40px; height: 40px; border-color: var(--line); background: var(--gold-wash) }
+.ctrl-metric small { display: block; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase }
+.ctrl-metric b { font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums }
+.play-btn {
+  width: 72px; height: 72px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold-deep));
+  border: 1px solid rgba(255,255,255,.55);
+  display: grid; place-items: center;
+  box-shadow: 0 12px 28px -10px rgba(255,255,255,.6);
+  transition: transform var(--dur-1);
+}
+.play-btn:hover { transform: scale(1.05) }
+.play-btn svg { width: 22px; height: 22px; stroke: #131007; fill: #131007 }
+.pin-btn {
+  width: 48px; height: 48px; border-radius: 50%; margin: 8px auto;
+  background: rgba(245,241,230,.05); border: 1px solid var(--line-soft);
+  display: grid; place-items: center;
+}
+.pin-btn svg { width: 20px; height: 20px; stroke: var(--bone); fill: none; stroke-width: 1.8 }
+
+/* Workout planner */
+.planner-header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px }
+.planner-header h2 { font-size: 34px; font-weight: 700; text-transform: uppercase }
+.planner-header span { font-size: 12.5px; color: var(--muted); font-weight: 600 }
+.mode-tabs {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-radius: 999px; padding: 4px;
+  background: rgba(10,14,19,.8); border: 1px solid var(--line-soft);
+}
+.mode-tab { padding: 11px; border-radius: 999px; text-align: center; font-size: 13.5px; font-weight: 700; color: var(--muted); min-height: 44px; transition: all var(--dur-1) }
+.mode-tab.active { background: var(--gold); color: #131007 }
+.day-scroll { display: flex; gap: 8px; overflow-x: auto; padding: 4px 2px; scrollbar-width: none }
+.day-scroll::-webkit-scrollbar { display: none }
+.day-btn {
+  flex-shrink: 0; padding: 10px 16px; border-radius: 999px; min-height: 44px;
+  background: rgba(245,241,230,.05); border: 1px solid var(--line-soft);
+  font-size: 13.5px; font-weight: 700; color: var(--muted);
+}
+.day-btn:hover { color: var(--bone); border-color: var(--line) }
+.day-btn.active { background: var(--gold-wash); border-color: var(--gold); color: var(--gold-bright) }
+.routine-card {
+  border-radius: 20px; padding: 20px;
+  background: linear-gradient(180deg, rgba(27,35,46,.66), rgba(10,14,19,.9));
+  border: 1px solid var(--line-soft);
+}
+.split-label { font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--gold-bright); letter-spacing: 0.12em }
+.split-name { font-family: var(--font-display); font-size: 28px; font-weight: 700; margin-bottom: 14px; text-transform: uppercase }
+.ex-list { display: flex; flex-direction: column; gap: 8px }
+.ex-item {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 12px 12px 12px 14px; border-radius: 14px;
+  background: rgba(245,241,230,.04);
+  border: 1px solid var(--line-soft);
+}
+.ex-item.done { border-color: rgba(34,197,94,.45); background: rgba(34,197,94,.08) }
+.ex-left { display: flex; align-items: center; gap: 12px; min-width: 0 }
+.ex-check {
+  width: 30px; height: 30px; border-radius: 9px; flex-shrink: 0;
+  border: 1.5px solid rgba(245,241,230,.3); background: transparent;
+  display: grid; place-items: center; color: transparent;
+}
+.ex-item.done .ex-check { background: var(--success); border-color: var(--success); color: #06230f }
+.ex-check svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 3 }
+.ex-name { font-size: 14.5px; font-weight: 700; overflow-wrap: anywhere }
+.ex-item.done .ex-name { text-decoration: line-through; color: var(--muted) }
+.ex-meta { font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums }
+.ex-rm { color: var(--ash-dim); padding: 10px; min-width: 44px; min-height: 44px; border-radius: 10px }
+.ex-rm:hover { color: var(--danger); background: rgba(239,68,68,.1) }
+.ex-rm svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2 }
+.empty-day { text-align: center; padding: 28px 16px; color: var(--muted); font-size: 14.5px }
+.rest-box {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 16px; border-radius: 16px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid var(--line);
+}
+.rest-left { display: flex; align-items: center; gap: 12px }
+.rest-left svg { width: 22px; height: 22px; stroke: var(--gold-bright); fill: none; stroke-width: 1.8 }
+.rest-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted) }
+.rest-val { font-family: var(--font-display); font-size: 30px; font-weight: 700; color: var(--gold-bright); font-variant-numeric: tabular-nums; line-height: 1 }
+.rest-btns { display: flex; gap: 8px }
+.rest-btn {
+  padding: 10px 16px; border-radius: 999px; min-height: 44px;
+  background: rgba(6,8,11,.5); border: 1px solid var(--line-soft);
+  font-size: 13px; font-weight: 700; color: var(--bone);
+}
+.rest-btn:hover { background: var(--gold); color: #131007; border-color: var(--gold) }
+
+/* Weight */
+.weight-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px }
+.weight-tile {
+  border-radius: 16px; padding: 16px;
+  background: linear-gradient(180deg, rgba(27,35,46,.66), rgba(10,14,19,.88));
+  border: 1px solid var(--line-soft);
+}
+.weight-tile:first-child { border-top: 2px solid var(--gold) }
+.wt-label { font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--muted); letter-spacing: 0.1em }
+.wt-val { font-family: var(--font-display); font-size: 38px; font-weight: 700; margin-top: 2px; font-variant-numeric: tabular-nums; line-height: 1 }
+.wt-val small { font-family: var(--font-sans); font-size: 13px; color: var(--muted); font-weight: 600 }
+.wt-change { font-size: 12.5px; font-weight: 800; margin-top: 4px }
+.wt-change.down { color: #4ade80 }
+.wt-change.up { color: #f87171 }
+.weight-input-row {
+  display: flex; gap: 10px;
+  border-radius: 16px; padding: 12px;
+  background: rgba(20,27,35,.6); border: 1px solid var(--line-soft);
+}
+.weight-field {
+  flex: 1; padding: 12px 14px; min-height: 48px; min-width: 0;
+  background: rgba(245,241,230,.05); border: 1px solid var(--line-soft);
+  border-radius: 12px; color: var(--bone); font-weight: 700; outline: none;
+}
+.weight-field:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(255,255,255,.2) }
+.chart-card {
+  border-radius: 20px; padding: 18px;
+  background: linear-gradient(180deg, rgba(27,35,46,.66), rgba(10,14,19,.9));
+  border: 1px solid var(--line-soft);
+}
+.chart-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 12px }
+.chart-top h4 { font-family: var(--font-display); font-size: 24px; font-weight: 700; text-transform: uppercase }
+.chart-svg { width: 100%; height: 180px; display: block }
+.chart-line { fill: none; stroke: var(--gold-bright); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round }
+.chart-area { fill: url(#chartGrad) }
+.chart-dot { fill: var(--gold-bright); stroke: #0a0e13; stroke-width: 2; cursor: pointer }
+.hydration-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  border-radius: 16px; padding: 14px 16px;
+  background: rgba(20,27,35,.6); border: 1px solid var(--line-soft);
+}
+.hydration-left { display: flex; align-items: center; gap: 12px }
+.hydration-left svg { width: 22px; height: 22px; stroke: var(--gold-bright); fill: none; stroke-width: 1.8 }
+.hydration-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted) }
+.hydration-val { font-size: 15px; font-weight: 800; font-variant-numeric: tabular-nums }
+
+/* Screens */
+.app-screen { display: none; flex-direction: column; gap: 12px }
+.app-screen.active { display: flex }
+.quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px }
+.quick-btn {
+  border-radius: 18px; padding: 20px 14px; min-height: 120px;
+  background: linear-gradient(180deg, rgba(27,35,46,.66), rgba(10,14,19,.88));
+  border: 1px solid var(--line-soft);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  text-align: center; transition: transform var(--dur-1), border-color var(--dur-1);
+}
+.quick-btn:hover { border-color: var(--gold); transform: translateY(-2px) }
+.quick-btn svg { width: 24px; height: 24px; stroke: var(--gold-bright); fill: none; stroke-width: 1.8 }
+.quick-btn strong { font-size: 14.5px; font-weight: 700 }
+.quick-btn span { font-size: 12px; color: var(--muted) }
+
+/* ===================== FITNESS UX UPGRADE =====================
+   Touch-first refinements for the workout flow: labeled dock, visible
+   day strip, press feedback, styled form controls. Class/ID hooks are
+   unchanged — portal.js logic is untouched. */
+
+/* Screen transition — spatial continuity between tabs */
+.app-screen.active { animation: screenIn 320ms var(--ease-out) both }
+@keyframes screenIn { from { opacity: 0; transform: translateY(14px) } to { opacity: 1; transform: none } }
+
+/* Dock labels — icon + text beats icon-only for recognition */
+.dock-btn { flex-direction: column; gap: 3px; height: 62px; width: 64px }
+.dock-btn::before {
+  content: ""; order: 1;
+  font-size: 9.5px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ash-dim); line-height: 1;
+}
+.dock-btn[data-screen="screenDashboard"]::before { content: "Home" }
+.dock-btn[data-screen="screenWorkout"]::before { content: "Workout" }
+.dock-btn[data-screen="screenSession"]::before { content: "Session" }
+.dock-btn[data-screen="screenProfile"]::before { content: "Profile" }
+.dock-btn.on::before { color: #131007 }
+.dock-btn.on::after { bottom: 4px }
+.dock-btn:focus-visible, .quick-btn:focus-visible, .day-btn:focus-visible,
+.ex-check:focus-visible, .rest-btn:focus-visible, .mode-tab:focus-visible,
+.run-card:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px }
+
+/* Quick actions — icon tile, left-aligned text, real press feedback */
+.quick-btn { align-items: flex-start; text-align: left; padding: 16px 14px; gap: 10px }
+.quick-btn svg {
+  width: 46px; height: 46px; padding: 12px; border-radius: 14px; flex-shrink: 0;
+  background: var(--gold-wash); border: 1px solid var(--line);
+  stroke: var(--gold-bright);
+}
+.quick-btn strong { font-size: 15px }
+.quick-btn span { font-size: 12px }
+.quick-btn:active { transform: scale(0.97); border-color: var(--gold) }
+
+/* Day strip — all 7 days visible at once, no hidden scroll */
+.day-scroll { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; overflow: visible; padding: 2px }
+.day-btn { padding: 10px 2px; font-size: 12px; min-height: 48px; width: 100% }
+.day-btn.active {
+  background: #ffffff; border-color: #ffffff; color: #0b0e12;
+  box-shadow: 0 8px 20px -8px rgba(255,255,255,.55);
+}
+
+/* Exercise rows — bigger touch checkbox, hover + keyboard affordance */
+.ex-item { padding: 12px; gap: 10px }
+.ex-item:hover { border-color: var(--line) }
+.ex-item:focus-within { border-color: var(--gold) }
+.ex-check { width: 34px; height: 34px; border-radius: 10px }
+
+/* Rest timer — proper timer card with a primary Start action */
+.rest-box { padding: 16px; gap: 10px; flex-wrap: wrap }
+.rest-val { font-size: 34px; color: #ffffff }
+#restStartBtn { background: #ffffff; border-color: #ffffff; color: #0b0e12; padding: 10px 22px }
+
+/* Segmented control — active tab carries weight */
+.mode-tab.active { box-shadow: 0 6px 18px -6px rgba(255,255,255,.45) }
+
+/* Form controls — profile + planner selects were unstyled in the portal */
+.form-group { display: flex; flex-direction: column; gap: 6px }
+.form-stack { display: flex; flex-direction: column; gap: 12px }
+.form-label { display: block; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted) }
+.form-input, .form-select {
+  width: 100%; min-height: 52px; padding: 13px 14px;
+  font-size: 15px; font-weight: 600; color: var(--bone);
+  background: rgba(255,255,255,.05); border: 1px solid var(--line-soft);
+  border-radius: 13px; outline: none;
+  transition: border-color var(--dur-1), box-shadow var(--dur-1);
+}
+.form-input::placeholder { color: var(--ash-dim); font-weight: 500 }
+.form-input:focus, .form-select:focus { border-color: #ffffff; box-shadow: 0 0 0 3px rgba(255,255,255,.18) }
+.form-select option { background: #141b23; color: var(--bone) }
+
+/* Hydration steppers — true 44px touch targets */
+#hydrationMinus, #hydrationPlus { width: 44px !important; height: 44px; min-height: 44px }
+
+@media (max-width: 480px) {
+  .app-shell { padding-left: 12px; padding-right: 12px; padding-top: 84px }
+  .stats-row { grid-template-columns: 1fr 1fr }
+  .weight-tiles { grid-template-columns: 1fr 1fr }
+  .quick-grid { gap: 8px }
+  .giant-timer b { font-size: 56px }
+  .ctrl-metric { padding-right: 10px }
+  .portal-topbar { padding: 10px 12px }
+  .hide-xs { display: none }
+  .show-xs { display: inline }
+}
+@media (max-width: 380px) {
+  .app-shell { padding-left: 10px; padding-right: 10px }
+  .stats-row, .weight-tiles { grid-template-columns: 1fr 1fr }
+  .stat-glass strong { font-size: 30px }
+  .weight-input-row { flex-direction: column }
+  .weight-input-row .btn-orange { width: 100% }
+  .ctrl-bar { flex-wrap: nowrap; gap: 6px }
+  .ctrl-metric { padding: 0 10px 0 6px; font-size: 13px }
+  .play-btn { width: 64px; height: 64px }
+  .quick-btn { min-height: 108px; padding: 16px 10px }
+  .day-scroll { gap: 4px }
+  .day-btn { font-size: 11px; padding: 10px 0 }
+}
+@media (prefers-reduced-motion: reduce) {
+  .run-card:hover, .quick-btn:hover, .dock-btn:hover { transform: none }
+  .app-screen.active { animation: none }
+  .quick-btn:active { transform: none }
+}
